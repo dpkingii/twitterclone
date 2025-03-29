@@ -11,6 +11,30 @@ display a red heart "❤️" make sure to increase or decrease the like counter 
 Theres a 'tweet' class you can use to style your tweet.
 */
 
+function Tweet({id, username, content, likes, timestamp}){
 
+    const [numLike, setLike] = useState(likes)
+    const [liked, setLiked] = useState(false)
 
-// export default Tweet;
+    function handleClick(){
+        setLiked(!liked)
+        if (!liked){
+            setLike(numLike+1)
+        }else{
+            setLike(numLike-1)
+        }
+    }
+
+    return (
+        <div className='tweet'>
+            <h2>@{username}</h2>
+            <p>{content}</p>
+            <p>{timestamp} ago</p>
+            <div onClick={()=>handleClick()}>
+                <button>{liked? <span>❤️</span>: <span>🤍</span>} {numLike} Likes</button>
+            </div>
+        </div>
+    )
+}
+
+export default Tweet;
